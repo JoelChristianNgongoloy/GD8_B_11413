@@ -42,13 +42,21 @@ class MovieController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'director' => 'required',
-            'duration' => 'required'
+            'duration' => 'required',
+            'image' => 'required',
         ]);
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $image_Name = $image->getClientOriginalName();
+            $image->move(public_path('/public/images/'), $image_Name);
+        }
 
         Movie::create([
             'title' => $request->title,
             'director' => $request->director,
-            'duration' => $request->duration
+            'duration' => $request->duration,
+            'image' => $image_Name,
         ]);
 
         try {
@@ -84,15 +92,28 @@ class MovieController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'director' => 'required',
-            'duration' => 'required'
+            'duration' => 'required',
+            'image' => 'image',
         ]);
+
+        if ($request->hasFile('image')) {
+            if ($movie->image) {
+                unlink(public_path('public/images/' . $movie->image));
+            }
+
+            $image = $request->file('image');
+            $image_Name = $image->getClientOriginalName();
+            $image->move(public_path('public/images/'), $image_Name);
+
+            $movie->update(['image' => $image_Name]);
+        }
+
         $movie->update([
             'title' => $request->title,
             'director' => $request->director,
-            'duration' => $request->duration
+            'duration' => $request->duration,
         ]);
-        return redirect()->route('movie.index')->with(['success' => 'Data
-Berhasil Diubah!']);
+        return redirect()->route('movie.index')->with(['success' => 'Data Berhasil Diubah!']);
     }
 
     /**

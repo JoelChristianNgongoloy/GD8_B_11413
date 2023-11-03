@@ -3,7 +3,7 @@
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
-            <div class="col-sm6">
+            <div class="col-sm-6">
                 <h1 class="m-0">Tambah Movie</h1>
             </div>
             <!-- /.col -->
@@ -23,6 +23,7 @@
 </div>
 <!-- /.content-header -->
 <!-- Main content -->
+
 <div class="content">
     <div class="container-fluid">
         <div class="row">
@@ -32,12 +33,20 @@
                         <form action="{{ route('movie.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label class="font-weightbold">Image</label>
+                                    <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image">
+                                    @error('image')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
+                                </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-12">
                                     <label class="font-weightbold">Title</label>
-                                    <input type="text" class="form-control
-@error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" placeholder="Masukkan Title">
+                                    <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" placeholder="Masukkan Title">
                                     @error('title')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -48,9 +57,7 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label class="font-weightbold">Director</label>
-                                    <input type="text" class="form-control
-@error('director') is-invalid @enderror" name="director" value="{{
-old('director') }}" placeholder="Masukkan Director">
+                                    <input type="text" class="form-control @error('director') is-invalid @enderror" name="director" value="{{ old('director') }}" placeholder="Masukkan Director">
                                     @error('director')
                                     <div class="invalid-feedback">x
                                         {{ $message }}
@@ -59,9 +66,7 @@ old('director') }}" placeholder="Masukkan Director">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="font-weightbold">Duration</label>
-                                    <input type="number" class="form-control
-@error('duration') is-invalid @enderror" name="duration" value="{{
-old('duration') }}" placeholder="Masukkan Duration">
+                                    <input type="number" class="form-control @error('duration') is-invalid @enderror" name="duration" value="{{ old('duration') }}" placeholder="Masukkan Duration">
                                     @error('duration')
                                     <div class="invalid-feedback">
                                         {{ $message }}

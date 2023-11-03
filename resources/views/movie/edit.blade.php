@@ -34,10 +34,19 @@
                             @method('PUT')
                             <div class="form-row">
                                 <div class="form-group col-md-12">
+                                    <label class="font-weightbold">Image</label>
+                                    <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image">
+                                    @error('image')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
                                     <label class="font-weightbold">Title</label>
-                                    <input type="text" class="form-control
-@error('title') is-invalid @enderror" name="title" value="{{ old('title',
-$movie->title )}}">
+                                    <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title', $movie->title )}}">
                                     @error('title')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -48,9 +57,7 @@ $movie->title )}}">
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label class="font-weightbold">Director</label>
-                                    <input type="text" class="form-control
-@error('director') is-invalid @enderror" name="director" value="{{
-old('director', $movie->director) }}">
+                                    <input type="text" class="form-control @error('director') is-invalid @enderror" name="director" value="{{ old('director', $movie->director) }}">
                                     @error('director')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -59,9 +66,7 @@ old('director', $movie->director) }}">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="font-weightbold">Duration</label>
-                                    <input type="number" class="form-control
-@error('duration') is-invalid @enderror" name="duration" value="{{
-old('duration', $movie->duration) }}">
+                                    <input type="number" class="form-control @error('duration') is-invalid @enderror" name="duration" value="{{ old('duration', $movie->duration) }}">
                                     @error('duration')
                                     <div class="invalid-feedback">
                                         {{ $message }}
